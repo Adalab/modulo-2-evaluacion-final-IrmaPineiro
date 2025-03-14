@@ -10,19 +10,28 @@
 </head>
 
 <body>
-    <main>
-        <div>
-            <h3>Buscador de Series de Anime</h3>
+    <header>
+        <h1>Buscador de Series Anime</h1>
+    </header>
+    <main class="container">
+        <section class="js-search search">
             <input class="js-searchText" type="text" id="search" placeholder="Buscar por nombre de serie">
             <button class="js-searchBtn" type="submit">Buscar</button>
             <button class="js-resetBtn" type="reset">Reset</button>
+        </section>
 
-        </div>
-        <div>
-            <ul class="js-list">
+        <section class="favoritesYresults">
+            <section class="js-favorites favorites">
+                <h2>Series Favoritas</h2>
+                <ul class="js-favoriteList favoriteList"></ul>
+            </section>
+            <section class="js-results results">
+                <h2>Resultados</h2>
+                <ul class="js-resultsList resultsList"></ul>
+            </section>
+        </section>
 
-            </ul>
-        </div>
+
 
     </main>
 
