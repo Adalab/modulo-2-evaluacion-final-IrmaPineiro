@@ -23,7 +23,7 @@ let favoriteSeriesList = [];  //Estará vacía, hasta q la usuaria vaya llenando
 
 
 
-// Cargar favoritos desde localStorage al inicio
+// Cargar favoritos desde localStorage al inicio?
 const storedFavorites = JSON.parse(localStorage.getItem("favoriteSeries"));
 if (storedFavorites) {
     favoriteSeriesList = storedFavorites;
