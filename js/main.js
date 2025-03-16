@@ -51,6 +51,8 @@ function renderSeries(seriesData) {
         </li>`;
         ulResultsList.innerHTML += listItemResults; //Añadir a la lista de resultados. Ahora ya se pinta lo buscado en la web. 
 
+        //Falta hacer que resalte el borde si está en favoritos.
+
 
 
 
@@ -138,7 +140,7 @@ function handleReset(event) {
     event.preventDefault();
     searchText.value = ""; //Limpiar campo de entrada.
     ulResultsList.innerHTML = ""; //Limpiar la lista de resultados.
-    ulFavoriteList.innerHTML = ""; //Limpiar la lista de favoritos.
+    ulFavoriteList.innerHTML = ""; //Limpiar la lista de favoritos. SE BORRA PERO ESTÁ.
 
 }
 resetBtn.addEventListener("click", handleReset)
