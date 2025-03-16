@@ -99,6 +99,18 @@ body {
     border-radius: 10px;
 }
 
+.inFavorites {
+    border: 6px solid rgb(212, 33, 153);
+
+}
+
+.deleteBtn {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
 
 
 
@@ -129,8 +141,6 @@ body {
     flex-wrap: wrap;
     gap: 10px;
     background-color: rgb(146, 92, 197);
-
-
 }
 
 
@@ -147,6 +157,7 @@ body {
     color: rgb(27, 207, 87);
     text-align: center;
     border: 3px solid rgb(34, 200, 212);
+    cursor: pointer;
 
     .img {
         max-width: 100%;
