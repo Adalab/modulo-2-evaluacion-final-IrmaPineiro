@@ -9,7 +9,7 @@
           -pintar imagen y titulo.
     -Si la serie buscada, no tiene imagen, devolver imagen de relleno.
     -Si la usuaria no introduce un valor:
-    -error.
+    -error.  
 
  */
 
