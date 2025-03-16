@@ -23,11 +23,12 @@ let favoriteSeriesList = [];  //Estará vacía, hasta q la usuaria vaya llenando
 
 
 
+
 // Cargar favoritos desde localStorage al inicio?
-const storedFavorites = JSON.parse(localStorage.getItem("favoriteSeries"));
+const storedFavorites = JSON.parse(localStorage.getItem("favoriteSeries")); //Ahora se convierte en un array.
 if (storedFavorites) {
     favoriteSeriesList = storedFavorites;
-    renderFavorites(favoriteSeriesList);
+    renderFavorites(favoriteSeriesList); //llamamos a renderFavorites para pintar las imagenes en html.
 }
 
 
@@ -45,11 +46,13 @@ function renderSeries(seriesData) {
 
 
         //Creamos un nuevo elemento HTML para cada resultado:
-        const listItemResults = `
+        const resultListItem = `
         <li class="js-resultsListItem resultsListItem inFavorites" id=${id}>
         <h4>${title}</h4><img src="${images}" alt="${title}">
         </li>`;
-        ulResultsList.innerHTML += listItemResults; //Añadir a la lista de resultados. Ahora ya se pinta lo buscado en la web. 
+        ulResultsList.innerHTML += resultListItem; //Añadir a la lista de resultados. Ahora ya se pinta lo buscado en la web. 
+
+
 
         //Falta hacer que resalte el borde si está en favoritos.
 
@@ -77,8 +80,8 @@ function renderFavorites(favoriteSeriesList) {
         //Creamos un nuevo elemento HTML para cada resultado:
         const listItemFavorite = `
         <li class="js-favoriteListItem favoriteListItem" id=${id}>
-        <h4>${title}</h4><img src="${images}" alt="${title}">
         <button class="deleteBtn js-deleteBtn">x</button>
+        <h4>${title}</h4><img src="${images}" alt="${title}">
         </li>
         `;
         ulFavoriteList.innerHTML += listItemFavorite;
@@ -89,7 +92,7 @@ function renderFavorites(favoriteSeriesList) {
 
 
 //Función para el click de buscar:
-function handleClick(event) {
+function handleSearchClick(event) {
     event.preventDefault();
     const inputValue = searchText.value.toLowerCase();
 
@@ -102,7 +105,7 @@ function handleClick(event) {
             renderSeries(seriesList);
         })
 }
-searchBtn.addEventListener("click", handleClick);
+searchBtn.addEventListener("click", handleSearchClick);
 
 
 
@@ -115,7 +118,7 @@ function handleAddFavorite(event) {
     const seriesSelectedFav = seriesList.find((series) => {
         return String(series.mal_id) === idSeriesClicked; // Convertir mal_id a string para comparar con idSeriesClicked qu es un string. Salía undefined.
     });
-
+    //condición por si la serie ya está o no en favoritos:
     if (seriesSelectedFav) {
         const alreadyFavorite = favoriteSeriesList.find(favorite => favorite.mal_id === seriesSelectedFav.mal_id);
         if (!alreadyFavorite) {
@@ -126,12 +129,14 @@ function handleAddFavorite(event) {
             alert("Esta serie ya está en favoritos");
         }
     }
+
 }
 
-//Función para guardar en localStorage:
+//Función para guardar en localStorage. Si la saco fuera de la otra función es más acceisble.
 function saveFavoritesToLocalStorage() {
     localStorage.setItem("favoriteSeries", JSON.stringify(favoriteSeriesList));
 }
+
 
 
 
@@ -141,7 +146,22 @@ function handleReset(event) {
     searchText.value = ""; //Limpiar campo de entrada.
     ulResultsList.innerHTML = ""; //Limpiar la lista de resultados.
     ulFavoriteList.innerHTML = ""; //Limpiar la lista de favoritos. SE BORRA PERO ESTÁ.
-
+    localStorage.removeItem("favoriteSeries"); //Ahora se borra lo de localStorage.
+    localStorage.clear();
+    favoriteSeriesList = [];
 }
 resetBtn.addEventListener("click", handleReset)
+
+
+/* Cuando la usuaria hace click en eliminar,
+        -quitar el elemento de la lista.
+*/
+
+/*
+// Eliminar de favoritos:
+const deleteBtn = document.querySelector(".js-deleteBtn");
+for (const delButton of deleteBtn) {
+    delButton.addEventListener("click", handleDeleteClick)
+}
+*/
 
