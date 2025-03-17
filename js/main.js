@@ -154,14 +154,22 @@ resetBtn.addEventListener("click", handleReset)
 
 
 /* Cuando la usuaria hace click en eliminar,
-        -quitar el elemento de la lista.
-*/
+        -quitar el elemento de la lista.   */
+
+
 
 /*
 // Eliminar de favoritos:
 const deleteBtn = document.querySelector(".js-deleteBtn");
-for (const delButton of deleteBtn) {
-    delButton.addEventListener("click", handleDeleteClick)
+function handleDeleteClick(event) {
+    const deleteSeries = event.target;
+    console.log(deleteSeries);
+    ulFavoriteList.innerHTML -= listItemFavorite;
+
+
 }
+deleteBtn.addEventListener("click", handleDeleteClick)
+
 */
+
 

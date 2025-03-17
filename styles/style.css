@@ -144,8 +144,9 @@ body {
     justify-content: space-between;
     object-fit: contain;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 5px;
     background-color: black;
+    border: 3px solid antiquewhite;
 }
 
 
@@ -163,6 +164,7 @@ body {
     text-align: center;
     border: 3px solid rgb(34, 200, 212);
     cursor: pointer;
+    margin: 7px;
 
 }
 
