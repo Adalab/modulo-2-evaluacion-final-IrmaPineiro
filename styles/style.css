@@ -53,7 +53,6 @@ body {
     align-content: center;
     flex-wrap: wrap;
 
-
 }
 
 .favorites h2 {
@@ -93,7 +92,6 @@ body {
     padding: 10px;
     gap: 10px;
     color: #da92c8;
-
 }
 
 .favoriteListItem img {
@@ -111,7 +109,6 @@ body {
     min-width: 30px;
     padding: 10px;
     margin: 10px;
-
     border-radius: 15px;
     cursor: pointer;
     color: black;
@@ -126,7 +123,6 @@ body {
 
 
 
-
 .results {
     width: 65%;
     display: flex;
@@ -134,8 +130,8 @@ body {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-
 }
+
 
 .results h2 {
     width: 100%;
@@ -146,7 +142,6 @@ body {
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
 }
-
 
 
 .resultsList {
@@ -176,7 +171,6 @@ body {
     border: 3px solid rgb(34, 200, 212);
     cursor: pointer;
     margin: 7px;
-
 }
 
 .resultsListItem img {
