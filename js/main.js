@@ -24,7 +24,7 @@ let favoriteSeriesList = [];  //Estará vacía, hasta q la usuaria vaya llenando
 
 
 
-// Cargar favoritos desde localStorage al inicio?
+// Cargar favoritos desde localStorage al inicio.
 const storedFavorites = JSON.parse(localStorage.getItem("favoriteSeries")); //Ahora se convierte en un array.
 if (storedFavorites) {
     favoriteSeriesList = storedFavorites;
@@ -38,7 +38,7 @@ function renderSeries(seriesData) {
     //Bucle para acceder al array de objetos, y acceder al titulo y a la imagen que la usuaria ha buscado:
     for (const series of seriesData) {
         const title = series.title;
-        const images = series.images.webp.image_url;
+        let images = series.images.webp.image_url;
         const id = series.mal_id;
         if (images === "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png") {
             images = "https://thumbs.dreamstime.com/b/error-109026446.jpg";
@@ -47,16 +47,10 @@ function renderSeries(seriesData) {
 
         //Creamos un nuevo elemento HTML para cada resultado:
         const resultListItem = `
-        <li class="js-resultsListItem resultsListItem inFavorites" id=${id}>
+        <li class="js-resultsListItem resultsListItem" id=${id}>
         <h4>${title}</h4><img src="${images}" alt="${title}">
         </li>`;
         ulResultsList.innerHTML += resultListItem; //Añadir a la lista de resultados. Ahora ya se pinta lo buscado en la web. 
-
-
-
-        //Falta hacer que resalte el borde si está en favoritos.
-
-
 
 
         //Ahora vamos a pintar la lista de favoritos. Para esto hacemos querySelectorAll y SIEMPRE que hago un All, hacemos un bucle for-of para acceder a cada elemento del html:
@@ -80,15 +74,43 @@ function renderFavorites(favoriteSeriesList) {
         //Creamos un nuevo elemento HTML para cada resultado:
         const listItemFavorite = `
         <li class="js-favoriteListItem favoriteListItem" id=${id}>
-        <button class="deleteBtn js-deleteBtn">x</button>
+        <button class="deleteBtn js-deleteBtn" id="${id}">x</button>
         <h4>${title}</h4><img src="${images}" alt="${title}">
         </li>
         `;
         ulFavoriteList.innerHTML += listItemFavorite;
-
     }
+
+    //Asignar el listener justo despues de crear el botón, sino, no funciona:
+    const allDeleteButtons = document.querySelectorAll(".js-deleteBtn");
+    //console.log(allDeleteButtons);
+    //Y ahora el bucle:
+    for (const deleteBton of allDeleteButtons) {
+        deleteBton.addEventListener("click", handleDeleteClick) //Para escuchar cada elemento del addEventListener.
+    }
+
 }
 
+//Función para eliminar favoritos:
+function handleDeleteClick(event) {
+    event.preventDefault();
+    //console.log("Botón de eliminar clicado con ID:", event.currentTarget.id);
+    const deleteSeriesId = event.currentTarget.id; //para acceder al elemento por el Id.
+    //console.log("antes de eliminar:", favoriteSeriesList);
+    //console.log("id a eliminar:", deleteSeriesId);
+
+    favoriteSeriesList = favoriteSeriesList.filter( //filter para crear nuevo array sin el seleccionado.
+        (series) => String(series.mal_id) !== deleteSeriesId); //Convertir mal_id a string (pq es un numero).
+    saveFavoritesToLocalStorage(); //Actualizar LocalStorage;
+    renderFavorites(favoriteSeriesList); //Volver a renderizar favoritos.
+}
+//console.log("Despues de elimnar", favoriteSeriesList);
+/* Cuando la usuaria hace click en eliminar,
+          -obtener el id del elemento que se ha clickado,
+          y cuando tenga el Id en mi array de favoritos: let favoriteSeriesList = []; 
+          -eliminar el objeto del array --> filter.
+          -cuando tenga el objeto del array --> lo pinto de nuevo: renderFavorites(favoriteSeriesList);
+         */
 
 
 //Función para el click de buscar:
@@ -104,19 +126,21 @@ function handleSearchClick(event) {
             seriesList = data.data; //Array con los objetos de anime.
             renderSeries(seriesList);
         })
+
+
 }
 searchBtn.addEventListener("click", handleSearchClick);
 
 
 
-//Función para favoritos:
+//Función para añadir favoritos:
 function handleAddFavorite(event) {
     event.preventDefault();
     //console.log(event.currentTarget.id);
     const idSeriesClicked = event.currentTarget.id; //Para acceder a lo q es todo el elemento.
     //buscar la serie clickada a partir de este id:
     const seriesSelectedFav = seriesList.find((series) => {
-        return String(series.mal_id) === idSeriesClicked; // Convertir mal_id a string para comparar con idSeriesClicked qu es un string. Salía undefined.
+        return String(series.mal_id) === idSeriesClicked; // Convertir mal_id a string (pq es un numero) para comparar con idSeriesClicked qu es un string. Salía undefined.
     });
     //condición por si la serie ya está o no en favoritos:
     if (seriesSelectedFav) {
@@ -131,6 +155,9 @@ function handleAddFavorite(event) {
     }
 
 }
+
+
+
 
 //Función para guardar en localStorage. Si la saco fuera de la otra función es más acceisble.
 function saveFavoritesToLocalStorage() {
@@ -149,27 +176,20 @@ function handleReset(event) {
     localStorage.removeItem("favoriteSeries"); //Ahora se borra lo de localStorage.
     localStorage.clear();
     favoriteSeriesList = [];
+    seriesList = [];
 }
 resetBtn.addEventListener("click", handleReset)
 
 
-/* Cuando la usuaria hace click en eliminar,
-        -quitar el elemento de la lista.   */
 
 
 
-/*
-// Eliminar de favoritos:
-const deleteBtn = document.querySelector(".js-deleteBtn");
-function handleDeleteClick(event) {
-    const deleteSeries = event.target;
-    console.log(deleteSeries);
-    ulFavoriteList.innerHTML -= listItemFavorite;
 
 
-}
-deleteBtn.addEventListener("click", handleDeleteClick)
 
-*/
+
+
+
+
 
 
