@@ -50,14 +50,17 @@ body {
     width: 35%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    align-content: center;
+    flex-wrap: wrap;
+
+
 }
 
 .favorites h2 {
     width: 100%;
     text-align: center;
     padding: 20px;
-    background-color: antiquewhite;
+    background-color: #da92c8;
     color: black;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
@@ -68,28 +71,29 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-content: center;
     object-fit: contain;
     flex-wrap: wrap;
-    gap: 10px;
-    background-color: rgb(178, 197, 92);
-    font-family: fantasy;
+    gap: 5px;
+    background-color: rgb(0, 0, 0);
+    border: 3px solid #da92c8;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 
 
 .favoriteListItem {
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: row-reverse;
     justify-content: left;
     align-items: center;
-    overflow-wrap: normal;
-    background-color: rgba(63, 56, 170, 0.712);
-    border-radius: 15px;
+    background-color: black;
+    border: none;
     padding: 10px;
     gap: 10px;
-    color: rgb(27, 207, 87);
-    border: 3px solid rgb(34, 200, 212);
+    color: #da92c8;
+
 }
 
 .favoriteListItem img {
@@ -99,16 +103,25 @@ body {
     border-radius: 10px;
 }
 
-.inFavorites {
-    border: 6px solid rgb(212, 33, 153);
 
-}
 
 .deleteBtn {
     width: 30px;
     height: 30px;
+    min-width: 30px;
+    padding: 10px;
+    margin: 10px;
+
     border-radius: 15px;
     cursor: pointer;
+    color: black;
+    background-color: #da92c8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    font-weight: bold;
+
 }
 
 
@@ -121,6 +134,7 @@ body {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+
 }
 
 .results h2 {
@@ -134,13 +148,16 @@ body {
 }
 
 
+
 .resultsList {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     object-fit: contain;
     flex-wrap: wrap;
-    gap: 10px;
-    background-color: rgb(146, 92, 197);
+    background-color: black;
+    border: 3px solid antiquewhite;
+
 }
 
 
@@ -150,18 +167,24 @@ body {
     flex-direction: column-reverse;
     justify-content: space-between;
     align-content: center;
-    background-color: rgba(63, 56, 170, 0.712);
+    background-color: black;
     border-radius: 15px;
     padding: 10px;
     gap: 10px;
-    color: rgb(27, 207, 87);
+    color: rgb(34, 200, 212);
     text-align: center;
     border: 3px solid rgb(34, 200, 212);
     cursor: pointer;
+    margin: 7px;
 
-    .img {
-        max-width: 100%;
-        object-fit: contain;
-    }
+}
 
+.resultsListItem img {
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.resultsListItem:empty {
+    display: none;
 }
