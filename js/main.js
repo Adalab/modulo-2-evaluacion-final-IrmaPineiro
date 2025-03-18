@@ -40,6 +40,9 @@ function renderSeries(seriesData) {
         const title = series.title;
         let images = series.images.webp.image_url;
         const id = series.mal_id;
+        const type = series.type;
+
+        //console.log(series);
         if (images === "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png") {
             images = "https://thumbs.dreamstime.com/b/error-109026446.jpg";
         }
@@ -48,7 +51,7 @@ function renderSeries(seriesData) {
         //Creamos un nuevo elemento HTML para cada resultado:
         const resultListItem = `
         <li class="js-resultsListItem resultsListItem" id=${id}>
-        <h4>${title}</h4><img src="${images}" alt="${title}">
+        <h4>${title}</h4><img src="${images}" alt="${title}"><h3>${type}</h3>
         </li>`;
         ulResultsList.innerHTML += resultListItem; //Añadir a la lista de resultados. Ahora ya se pinta lo buscado en la web. 
 
@@ -57,7 +60,7 @@ function renderSeries(seriesData) {
         const allseriesDOM = document.querySelectorAll(".js-resultsListItem");
         //Y ahora el bucle:
         for (const seriesDOM of allseriesDOM) {
-            seriesDOM.addEventListener("click", handleAddFavorite) //Para escuchar cada elemnto del addEventListener.
+            seriesDOM.addEventListener("click", handleAddFavorite) //Para escuchar cada elemnto del addEventListener.//para poder añadir a favoritos.
             //AHORA YA PUDO HACER MI LISTA DE FAVORITOS POR FUERA(debajo de esta función).
         }
 
@@ -71,11 +74,12 @@ function renderFavorites(favoriteSeriesList) {
         const title = favorite.title;
         const images = favorite.images.webp.image_url;
         const id = favorite.mal_id;
+        const type = favorite.type;
         //Creamos un nuevo elemento HTML para cada resultado:
         const listItemFavorite = `
         <li class="js-favoriteListItem favoriteListItem" id=${id}>
         <button class="deleteBtn js-deleteBtn" id="${id}">x</button>
-        <h4>${title}</h4><img src="${images}" alt="${title}">
+        <h4>${title}</h4><img src="${images}" alt="${title}"><h3>${type}</h3>
         </li>
         `;
         ulFavoriteList.innerHTML += listItemFavorite;
@@ -125,6 +129,7 @@ function handleSearchClick(event) {
             //console.log(data); //Todos los objetos
             seriesList = data.data; //Array con los objetos de anime.
             renderSeries(seriesList);
+            //console.log(seriesList);
         })
 
 
